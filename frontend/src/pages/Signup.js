@@ -12,9 +12,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme();
+import { default as theme } from '../themes/BlackGrayTheme';
 
 function Signup() {
   
@@ -75,10 +75,6 @@ function Signup() {
               type="password"
               id="re-enter-password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
