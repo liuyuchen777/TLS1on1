@@ -1,15 +1,4 @@
-import express from 'express';
-import cors from 'cors';
-import cookieSession from 'cookie-session';
+import './config.js';
+import db from './db/DB.js';
 
-const app = express();
-
-const port = 3000
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+console.log(db.models);
