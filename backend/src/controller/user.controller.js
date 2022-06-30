@@ -9,25 +9,43 @@ function generateRandomUserName() {
 }
 
 function createUser(req, res) {
-    // console.log(req.body);
 
     User.create({
         _id: req.body.email,
         userName: generateRandomUserName(),
         passworHash: bcrypt.hashSync(req.body.password, salt),
     }).then(
-        user => res.status(201).send(user)
-    ).catch(
-        err => res.status(401).send(err) 
+        user => res.status(201).send({ user: user, message: "Success: Create user!" }),
+        err => res.status(500).send({ message: "Error: " + err }) 
     );
 }
 
 function loginUser(req, res) {
 
+    User.findById(req.body.username, 'passwordHash').exec()
+        .then(
+            (user) => {
+                if (!user) res.status(400).send({ message: "Error: No such user!" });
+                else
+                    bcrypt.compare(req.body.password, user.passwordHash).then((result) => {
+                        if (result) res.status(201).send({ message: "Success: Login!" });
+                        else res.status(400).send({ message: "Fail: Login!" });
+                    });
+            },
+            (err) => res.status(500).send({ message: "Error: " + err })
+        );
 }
 
 function getUser(req, res) {
 
+    User.findById(req.params.username).exec()
+        .then(
+            (user) => {
+                if (!user) res.status(400).send({ message: "Error: No such user!" });
+                else res.status(201).send({ user: user, message: "Success: Retrieve user!" });
+            }, 
+            (err) => res.status(500).send({ message: "Error: " + err })
+        );
 }
 
 function updateUserBasicInformation(req, res) {
@@ -36,45 +54,98 @@ function updateUserBasicInformation(req, res) {
         userName: req.body.userName,
         sexual: req.body.sexual,
         target: req.body.target
-    }, {
-        new: true // return updated document
-    }).exec()
-        .catch(
-            err => res.status(401).send("Error: " + err)
-        )
-        .then((user) => {
+    }, { new: true }).exec()
+        .then(
+            (user) => {
             if (!user)
-                res.status(401).send("User not found!");
+                res.status(400).send({ message: "Error: No such user!" });
             else
-                res.status(201).send("Update Success: " + user);
-        });
+                res.status(201).send({ user: user, message: "Success: Update basic information!" });
+            },
+            (err) => res.status(500).send({ message: "Error: " + err })
+        );
 }
 
 function updateUserEducationRecord(req, res) {
 
-    
+    User.findById(req.params.username, 'educations').exec()
+        .then(
+            (record) => {
+                if (!record) res.status(400).send({ message: "Error: No such user!" });
+                else {
+                    // find eduction and update
+                    record.educations = record.educations.map(
+                        education => {
+                            if (education._id == req.params.id) return req.body;
+                            else return education;
+                        }
+                    );
+
+                    // update
+                    User.findByIdAndUpdate(record._id, {
+                        educations: record.educations
+                    }, {new: true}).exec()
+                        .then(
+                            (user) => res.status(201).send("Success: Update" + user),
+                            (err) => res.status(500).send({ message: "Error: Update: " + err })
+                        );
+                }
+            },
+            (err) => res.status(500).send({ message: "Error: Retrive information: " + err })
+        );
 }
 
 function addUserEducationRecord(req, res)  {
 
-    User.findById(req.params.username, 'educations')
-        .then((record) => {
-            record.educations.push({
-                university: req.body.university,
-                degree: req.body.degree,
-                major: req.body.major,
-                startDate: req.body.startDate,
-                endDate: req.body.endDate
-            });
+    User.findById(req.params.username, 'educations').exec()
+        .then(
+            (record) => {
+                if (!record) res.status(400).send({ message: "Error: No such user!" });
+                else {
+                    // add
+                    record.educations.push(req.body);
+                    
+                    // update
+                    User.findByIdAndUpdate(record._id, {
+                        educations: record.educations
+                    }, { new: true }).exec()
+                        .then(
+                            (user) => res.status(201).send({ user: user, message: "Success: Add education record!" }),
+                            (err) => res.status(500).send({ message: "Error: Update: " + err })
+                        );
+                }
+            },
+            (err) => res.status(500).send({ message: "Error: Retrive information: " + err })
+        );
+}
 
-            console.log(record.educations);
+function deleteUserEducationRecord() {
 
-            // User.findByIdAndUpdate(req.params.username, )
-        });
+}
+
+function updateUserExperienceRecord() {
+
+}
+
+function addUserExperienceRecord() {
+
+}
+
+function deleteUserExperienceRecord() {
+
 }
 
 export {
+    getUser,
+    loginUser,
     createUser,
+    // education relateted
     updateUserBasicInformation,
-    addUserEducationRecord
+    addUserEducationRecord,
+    updateUserEducationRecord,
+    deleteUserEducationRecord,
+    // experience related
+    updateUserExperienceRecord,
+    addUserExperienceRecord,
+    deleteUserExperienceRecord
 };

@@ -54,7 +54,32 @@ protected
 
 ## DB schemas
 
+- User
+```
+_id: String,    // email address
+userName: String,
+sexual: Boolean,
+educations: [{
+    university: String,
+    degree: String,
+    major: String,
+    startDate: Date,
+    endDate: Date   // expect end date
+}],
+experience: [{
+    experienceType: String,
+    title: String,
+    description: String,
+    startDate: Date,
+    endDate: Date   // expect end date
+}],
+role: Number,
+target: [Number],
+passwordHash: String
+```
 
+- Message
+  - How to store message?
 
 ### Tech Stack
 
@@ -63,4 +88,27 @@ protected
 
 ## How to use?
 
-Use shell script to start.
+### backend
+
+To run backend, you need have MongoDB Altas or MongoDB local community server (recommended) to hold data persistence layer.
+
+Initialize with npm
+```shell
+npm i
+# or
+npm install
+```
+
+Create `.env` file
+```
+# exmaple
+PORT=8080
+DB_CONNECTION_STRING=mongodb://localhost:27017/tls1on1  # mongodb connection string
+DEFAULT_PASSWORD=123456 
+JWT_SECRET=my_secret_12345
+```
+
+Run
+```
+npm run dev
+```
