@@ -54,34 +54,7 @@ protected
 
 ## DB schemas
 
-- Student:
-```json
-{
-  id: hash
-  name: string
-  educations: Educations[]
-}
-```
-- Teacher
-```json
-{
-  id: hash
-  name: string
-  educations: Educations[]
-}
-```
-- Message
-```
-{
-  id: hash
-  from: hash
-  to: hash
-  message: text
-  read: boolean
-  sendDate: date
-  readDate: date
-}
-```
+
 
 ### Tech Stack
 
