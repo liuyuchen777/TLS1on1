@@ -1,5 +1,7 @@
-import User from '../db/schemas/user.schema.js';
 import bcrypt from 'bcrypt';
+
+import User from '../db/schemas/user.schema.js';
+import { generateAccessToken } from '../utils/general-utils.js';
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -22,13 +24,17 @@ function createUser(req, res) {
 
 function loginUser(req, res) {
 
-    User.findById(req.body.username, 'passwordHash').exec()
+    User.findById(req.body.username, 'passwordHash role').exec()
         .then(
             (user) => {
                 if (!user) res.status(400).send({ message: "Error: No such user!" });
                 else
                     bcrypt.compare(req.body.password, user.passwordHash).then((result) => {
-                        if (result) res.status(201).send({ message: "Success: Login!" });
+                        if (result) {
+                            const token = generateAccessToken(user._id, user.role);
+
+                            res.status(201).send({ message: "Success: Login!", token: token });
+                        }
                         else res.status(400).send({ message: "Fail: Login!" });
                     });
             },
