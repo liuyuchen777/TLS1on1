@@ -4,12 +4,12 @@ const jwtSecret = process.env.jwt_secret;
 
 function generateAccessToken(userName, role) {
 
-    return 'Bearer ' + 
-        jwt.sign(
-            { user: userName, role: role },
-            jwtSecret,
-            { algorithm: "HS256", expiresIn: 60 * 60 * 24 * 3 }
-        );
+  return 'Bearer ' + 
+    jwt.sign(
+      { user: userName, role: role },
+      jwtSecret,
+      { algorithm: "HS256", expiresIn: 60 * 60 * 24 * 3 }
+    );
 }
 
 /**
@@ -17,18 +17,18 @@ function generateAccessToken(userName, role) {
  */
 function authenticateToken(req, res, next) {
     
-    const authHeader = req.headers.authorization
-    const token = authHeader && authHeader.split(' ')[1]
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
 
-    if (token == null) return res.status(401).send({ message: "Error: Unauthorized request!" });
+  if (token == null) return res.status(401).send({ message: "Error: Unauthorized request!" });
 
-    jwt.verify(token, jwtSecret, (err, user) => {
-        if (err) return res.status(403).send({ message: "Error: Verify token error fail!" });
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) return res.status(403).send({ message: "Error: Verify token error fail!" });
 
-        console.log(user);
+    console.log(user);
 
-        next()
-    })
+    next()
+  })
 }
 
 /**
@@ -37,18 +37,18 @@ function authenticateToken(req, res, next) {
  * role = 0/1 (Student/Teacher) can only modify its own information
  */
 function checkUserAuthorization(req, res, next) {
-    if (!req.params.username) 
-        res.status(500).send({ message: "Error: Sever internal error, no username" });
-    else if (!req.auth || !req.auth.user || !req.auth.role)
-        res.status(500).send({ message: "Error: Sever internal error, no auth parameters" });
-    else if (req.auth.role != 2 && req.params.username != req.auth.user) 
-        res.status(401).send({ message: "Error: Unathorized operation!" });
-    else
-        next()
+  if (!req.params.username) 
+    res.status(500).send({ message: "Error: Sever internal error, no username" });
+  else if (!req.auth || !req.auth.user || !req.auth.role)
+    res.status(500).send({ message: "Error: Sever internal error, no auth parameters" });
+  else if (req.auth.role != 2 && req.params.username != req.auth.user) 
+    res.status(401).send({ message: "Error: Unathorized operation!" });
+  else
+    next()
 }
 
 export {
-    generateAccessToken,
-    authenticateToken,
-    checkUserAuthorization
+  generateAccessToken,
+  authenticateToken,
+  checkUserAuthorization
 }

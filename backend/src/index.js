@@ -11,21 +11,21 @@ const port = process.env.port;
 
 (async function main() {
 
-    // connect mongodb
-    await mongooseConnect();
+  // connect mongodb
+  await mongooseConnect();
 
-    // initialize DB
-    if (process.env.initialize_db == "full")
-        await initializeDB();
+  // initialize DB
+  if (process.env.initialize_db == "full")
+    await initializeDB();
 
-    // config express midlleware
-    configMiddleware(app);
+  // config express midlleware
+  configMiddleware(app);
 
-    // add api
-    addRouter(app);
+  // add api
+  addRouter(app);
 
-    // start express app
-    app.listen(port, () => {
-        console.log(`SeverStart -> express listen on ${port}`);
-    });
+  // start express app
+  app.listen(port, () => {
+    console.log(`SeverStart -> express listen on ${port}`);
+  });
 })();

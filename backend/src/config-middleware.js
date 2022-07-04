@@ -3,27 +3,28 @@ import { expressjwt as jwt } from 'express-jwt';
 import cors from 'cors';
 
 const publicRoutes = [
-    '/api/signup',
-    '/api/login'
+  '/api/signup',
+  '/api/login'
 ];
 const jwtSecret = process.env.jwt_secret;
 
 function configMiddleware(app) {
-    // requst body parser
-    app.use(bodyParser.json());
+  // requst body parser
 
-    // jwt 
-    app.use(
-        jwt({
-          secret: jwtSecret,
-          algorithms: ["HS256"],
-        }).unless({
-          path: publicRoutes,
-        }),
-    );
+  app.use(bodyParser.json());
 
-    // cross-region
-    app.use(cors());
+  // jwt 
+  app.use(
+    jwt({
+      secret: jwtSecret,
+      algorithms: ["HS256"],
+    }).unless({
+      path: publicRoutes,
+    }),
+  );
+
+  // cross-region
+  app.use(cors());
 }   
 
 export default configMiddleware;
