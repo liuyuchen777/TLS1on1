@@ -11,6 +11,12 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 export const mainListItems = (
   <React.Fragment>
+    <ListItemButton component={Link} to="/">
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Home" />
+    </ListItemButton>
     <ListItemButton component={Link} to="/Profile">
       <ListItemIcon>
         <PeopleIcon />

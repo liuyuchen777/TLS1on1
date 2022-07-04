@@ -38,9 +38,10 @@ function authenticateToken(req, res, next) {
  */
 function checkUserAuthorization(req, res, next) {
     if (!req.params.username) 
-        res.status(500).send({ message: "Error: Sever internal error" });
-    else if (!req.auth || !req.auth.user || req.params.username != req.auth.user     // not current authorized user
-        || !req.auth.role || req.auth.role != 2) 
+        res.status(500).send({ message: "Error: Sever internal error, no username" });
+    else if (!req.auth || !req.auth.user || !req.auth.role)
+        res.status(500).send({ message: "Error: Sever internal error, no auth parameters" });
+    else if (req.auth.role != 2 && req.params.username != req.auth.user) 
         res.status(401).send({ message: "Error: Unathorized operation!" });
     else
         next()

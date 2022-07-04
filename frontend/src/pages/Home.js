@@ -64,8 +64,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-function Home() {
+function Home(props) {
   const [open, setOpen] = React.useState(true);
+
+  console.log(props.route);
 
   const toggleDrawer = () => {
     setOpen(!open);

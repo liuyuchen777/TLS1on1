@@ -1,4 +1,7 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+
+import axios from 'axios';
+import { useHistory, useNavigate } from "react-router-dom";
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -15,16 +18,45 @@ import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { default as theme } from '../themes/BlackGrayTheme';
+import { baseUrl } from '../utils/constant.js';
 
 function Login() {
-  
-  const handleSubmit = (event) => {
+
+  const [loginStatus,setLoginStatus] = useState('Login');
+  const navigate  = useNavigate();
+
+  const handleLogin = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    axios.post(baseUrl + "/api/login", {
+      username: data.get('email'),
+      password: data.get('password')
+    })
+      .then(
+        res => {
+          console.log(res.data);
+          window.localStorage.setItem('jwt_token', res.data.token);
+
+          setLoginStatus("Login Successful!");
+
+          // go to main page
+          navigate('/', {username: data.get('email')});
+        },
+        error => {
+          if (error.response.status != 201) {
+            window.localStorage.removeItem('jwt_token');
+            console.log(error.response.data.message);
+            if (error.response.status === 400) setLoginStatus("No such user");
+            else if (error.response.status === 401) setLoginStatus("Incorrect password");
+            console.log(loginStatus);
+          }
+        }
+      );
   };
 
   return (
@@ -45,7 +77,7 @@ function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -70,6 +102,9 @@ function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Typography component="h2" variant="h5" align='center' color='red'>
+              { loginStatus === 'Login' ? '': loginStatus }
+            </Typography>
             <Button
               type="submit"
               fullWidth

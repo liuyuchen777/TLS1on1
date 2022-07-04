@@ -1,14 +1,12 @@
 import fs from 'fs/promises';
 import bcrypt from 'bcrypt';
 
-import Role from './schemas/role.schema.js';
-import Target from './schemas/target.schema.js';
 import User from './schemas/user.schema.js';
+import Message from './schemas/message.schema.js';
 
 const fileNames = {
-    roles: "./src/db/documents-examples/roles-define.json",
-    targets: "./src/db/documents-examples/targets-define.json",
-    userExample: "./src/db/documents-examples/user-example.json"
+    userExample: "./src/db/documents-examples/user-example.json",
+    messageExample: "./src/db/documents-examples/user-example.json"
 };
 const defaultPassword = process.env.default_password;
 const salt = bcrypt.genSaltSync(10);
@@ -30,12 +28,9 @@ async function insertDocuments(fileName, model) {
     });
 }
 
-async function initializeDB(testMode) {
-    await insertDocuments(fileNames.targets, Target);
-    await insertDocuments(fileNames.roles, Role);
-    if (testMode) {
-        await insertDocuments(fileNames.userExample, User); 
-    }
+async function initializeDB() {
+    await insertDocuments(fileNames.userExample, User); 
+    await insertDocuments(fileNames.messageExample, Message); 
 }
 
 export {

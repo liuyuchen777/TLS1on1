@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import { expressjwt as jwt } from 'express-jwt';
+import cors from 'cors';
 
 const publicRoutes = [
     '/api/signup',
@@ -20,6 +21,9 @@ function configMiddleware(app) {
           path: publicRoutes,
         }),
     );
+
+    // cross-region
+    app.use(cors());
 }   
 
 export default configMiddleware;

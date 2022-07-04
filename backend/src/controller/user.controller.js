@@ -23,23 +23,28 @@ function createUser(req, res) {
 }
 
 function loginUser(req, res) {
+  User.findById(req.body.username, 'passwordHash role').exec()
+    .then(
+      (user) => {
+        if (!user) 
+          res.status(400)
+            .send({ message: `Error: No such user ${req.body.username}!` });
+        else
+          bcrypt.compare(req.body.password, user.passwordHash)
+            .then((result) => {
+              if (result) {
+                const token = generateAccessToken(user._id, user.role);
 
-    User.findById(req.body.username, 'passwordHash role').exec()
-        .then(
-            (user) => {
-                if (!user) res.status(400).send({ message: "Error: No such user!" });
-                else
-                    bcrypt.compare(req.body.password, user.passwordHash).then((result) => {
-                        if (result) {
-                            const token = generateAccessToken(user._id, user.role);
-
-                            res.status(201).send({ message: "Success: Login!", token: token });
-                        }
-                        else res.status(400).send({ message: "Fail: Login!" });
-                    });
-            },
-            (err) => res.status(500).send({ message: "Error: " + err })
-        );
+                res.status(201)
+                  .send({ message: "Success: Login!", token: token });
+              } else 
+                res.status(401)
+                  .send({ message: "Fail: Incorrect password!" });
+            });
+        },
+        (err) => res.status(500)
+          .send({ message: "Error: " + err })
+      );
 }
 
 function getUser(req, res) {

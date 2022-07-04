@@ -15,7 +15,8 @@ const port = process.env.port;
     await mongooseConnect();
 
     // initialize DB
-    // await initializeDB(true);   // true to insert test user
+    if (process.env.initialize_db == "full")
+        await initializeDB();
 
     // config express midlleware
     configMiddleware(app);
