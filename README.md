@@ -104,3 +104,6 @@ In developer mode
 ```bash
 npm run dev
 ```
+
+## Others
+- [22.07.04 Meeting](https://onedrive.live.com/edit.aspx?resid=5F5F3E6BC5D5E03B!201858&ithint=file%2cpptx&authkey=!ANvM2Rc0YIXIqcc)
