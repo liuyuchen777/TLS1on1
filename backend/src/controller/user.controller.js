@@ -12,10 +12,13 @@ function generateRandomUserName() {
 
 function createUser(req, res) {
 
+  console.log(`new user email: ${req.body.username}`)
+  console.log(`new user password: ${req.body.password}`)
+
   User.create({
     _id: req.body.email,
     userName: generateRandomUserName(),
-    passworHash: bcrypt.hashSync(req.body.password, salt),
+    passwordHash: bcrypt.hashSync(req.body.password, salt),
   }).then(
     user => res.status(201).send({ user: user, message: "Success: Create user!" }),
     err => res.status(500).send({ message: "Error: " + err }) 
