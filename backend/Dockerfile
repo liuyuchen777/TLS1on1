@@ -12,4 +12,4 @@ RUN npm i
 # Set the env to "production"
 ENV NODE_ENV production
 # Run default command
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "start"]

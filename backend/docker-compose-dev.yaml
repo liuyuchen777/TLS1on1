@@ -7,6 +7,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db:/data/db
+      - ./configdb:/data/configdb
 
   mongo-express:
     image: mongo-express
@@ -16,9 +21,6 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
-      ME_CONFIG_MONGODB_URL: mongodb://root@mongo:27017/
-
-  tls1on1-back:
-    image: tls1on1-back
-    ports: 
-      - 8080:8080
+      ME_CONFIG_MONGODB_SERVER: mongo
+    depends_on:
+      - mongo

@@ -1,22 +1,21 @@
 import bodyParser from 'body-parser';
 import { expressjwt as jwt } from 'express-jwt';
 import cors from 'cors';
+import express from 'express';
+import { JWT_SECRET } from './utils/constant';
 
 const publicRoutes = [
   '/api/signup',
   '/api/login'
 ];
-const jwtSecret = process.env.jwt_secret;
 
-function configMiddleware(app) {
-  // requst body parser
-
+function configMiddleware(app: express.Application) {
+  // request body parser
   app.use(bodyParser.json());
 
-  // jwt 
   app.use(
     jwt({
-      secret: jwtSecret,
+      secret: JWT_SECRET,
       algorithms: ["HS256"],
     }).unless({
       path: publicRoutes,

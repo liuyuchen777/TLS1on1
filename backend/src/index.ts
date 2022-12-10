@@ -1,22 +1,18 @@
 import express from 'express';
 
 import './config.js';
-import { connect as mongooseConnect } from './db/db.js';
-import { initializeDB } from './db/db-insert.js';
 import { addRouter } from './routes/router.js';
 import configMiddleware from './config-middleware.js';
+import { PORT } from './utils/constant';
 
 const app = express();
-const port = process.env.port;
 
 (async function main() {
 
   // connect mongodb
-  await mongooseConnect();
+
 
   // initialize DB
-  if (process.env.initialize_db == "full")
-    await initializeDB();
 
   // config express midlleware
   configMiddleware(app);
@@ -25,7 +21,7 @@ const port = process.env.port;
   addRouter(app);
 
   // start express app
-  app.listen(port, () => {
-    console.log(`SeverStart -> express listen on ${port}`);
+  app.listen(PORT, () => {
+    console.log(`SeverStart -> express listen on ${PORT}`);
   });
 })();
