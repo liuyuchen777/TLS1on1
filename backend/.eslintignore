@@ -6,3 +6,7 @@ node_modules/
 build/
 dist/
 tools/
+
+# db
+db/
+configdb/
