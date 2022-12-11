@@ -2,19 +2,9 @@
 
 ## Local
 
-Initialize with npm
 ```bash
-npm i
-# or
-npm install
-```
-
-Copy and change `.env` file correspondingly
-
-In developer mode, you need first have mongodb install in your local environment and then
-
-```bash
-npm run dev
+# start MongoDB container
+docker compose -f docker-compose-dev.yaml up -d
 ```
 
 ## Docker

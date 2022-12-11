@@ -6,7 +6,8 @@ import { JWT_SECRET } from './utils/constant';
 
 const publicRoutes = [
   '/api/signup',
-  '/api/login'
+  '/api/login',
+  '/api/health'
 ];
 
 function configMiddleware(app: express.Application) {

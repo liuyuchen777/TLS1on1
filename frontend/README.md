@@ -11,7 +11,7 @@ npm install
 In developer mode
 
 ```bash
-npm start
+npm run start
 ```
 
 ## Docker

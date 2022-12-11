@@ -36,7 +36,11 @@ API is defined in [Swagger](https://app.swaggerhub.com/apis-docs/tls1on1/tls1on1
 ## How to use?
 
 ```bash
+# check
+sh run.sh doctor
 
+# start frontend and backend
+sh run.sh
 ```
 
 ## Others

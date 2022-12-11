@@ -18,7 +18,12 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
       ME_CONFIG_MONGODB_URL: mongodb://root@mongo:27017/
 
-  tls1on1-back:
-    image: tls1on1-back
+  tls1on1-back-profile:
+    image: tls1on1-back-profile
     ports: 
       - 8080:8080
+
+  tls1on1-back-chat:
+    image: tls1on1-back-chat
+    ports:
+      - 8082:8082

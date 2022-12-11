@@ -29,6 +29,7 @@
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "mongoose": "^6.8.0",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -42,6 +43,7 @@
     "@types/jest": "^26.0.24",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/lodash": "^4.14.191",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^14.18.34",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
