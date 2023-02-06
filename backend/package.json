@@ -15,7 +15,9 @@
     "watch-ts": "tsc -w",
     "eslint": "eslint . --ext .js,.ts",
     "upgrade": "npm update --save-dev && npm update --save",
-    "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
+    "prettier-check": "npx prettier --check .  ",
+    "prettier-fix": "npx prettier --write .  "
   },
   "author": "liuyuchen777",
   "license": "Apache-2.0",
