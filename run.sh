@@ -8,13 +8,6 @@ has () {
 }
 
 case "$1" in
-    "" )
-        npm --prefix $FRONTEND_DIR install $FRONTEND_DIR
-        npm --prefix $FRONTEND_DIR run start
-        cd $BACKEND_DIR
-        docker compose up
-        exit 0
-        ;;
     "doctor" )
         HAS_ERROR=0
         if ! has docker; then

@@ -8,8 +8,15 @@ TLS1on1 is a online skill exchange website. It is a web application that users w
 # check
 sh run.sh doctor
 
-# start frontend and backend
-sh run.sh
+# start frontend
+cd frontend
+npm i
+npm run dev
+
+# start backend
+cd backend
+docker build -t tls1on1-back
+docker compose up
 ```
 
 ## Others
