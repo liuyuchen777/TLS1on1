@@ -1,10 +1,8 @@
-import { addUserRouter } from './user.router.js';
-import express from 'express';
+import { addUserRouter } from "./user.router.js";
+import express from "express";
 
 function addRouter(app: express.Application) {
   addUserRouter(app);
 }
 
-export {
-  addRouter
-}
+export { addRouter };

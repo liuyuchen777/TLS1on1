@@ -1,58 +1,58 @@
 [
-    {
-        "_id": "liuyuchen.hust@gmail.com",
-        "userName": "liuyuchen777",
-        "sexual": true,
-        "educations": [
-            {
-                "university": "Huazhong University of Science and Technology",
-                "degree": "bachelor",
-                "major": "Electrical Communication Engineering",
-                "startDate": "2016-09-01",
-                "endDate": "2020-06-01"
-            },
-            {
-                "university": "Tokyo Institute of Technology",
-                "degree": "master",
-                "major": "Information and Communication Engineering",
-                "startDate": "2020-09-01",
-                "endDate": "2022-09-01"
-            }
-        ],
-        "role": 0,
-        "experience": [],
-        "target": [0, 1]
-    },
-    {
-        "_id": "liu.y.ca@m.titech.ac.jp",
-        "userName": "qiusenwan666",
-        "sexual": false,
-        "educations": [
-            {
-                "university": "Southeast University",
-                "degree": "bachelor",
-                "major": "Computer Scicence",
-                "startDate": "2015-09-01",
-                "endDate": "2019-06-01"
-            },
-            {
-                "university": "University of Tokyo",
-                "degree": "master",
-                "major": "Computer Science",
-                "startDate": "2021-09-01",
-                "endDate": "2023-09-01"
-            }
-        ],
-        "experience": [
-            {
-                "experienceType": "intern",
-                "title": "Amazon SDE Intern",
-                "description": "Intern in Amazon Japan",
-                "startDate": "2022-03-01",
-                "endDate": "2022-05-01"
-            }
-        ],
-        "role": 0,
-        "target": [3]
-    }
+  {
+    "_id": "liuyuchen.hust@gmail.com",
+    "userName": "liuyuchen777",
+    "sexual": true,
+    "educations": [
+      {
+        "university": "Huazhong University of Science and Technology",
+        "degree": "bachelor",
+        "major": "Electrical Communication Engineering",
+        "startDate": "2016-09-01",
+        "endDate": "2020-06-01"
+      },
+      {
+        "university": "Tokyo Institute of Technology",
+        "degree": "master",
+        "major": "Information and Communication Engineering",
+        "startDate": "2020-09-01",
+        "endDate": "2022-09-01"
+      }
+    ],
+    "role": 0,
+    "experience": [],
+    "target": [0, 1]
+  },
+  {
+    "_id": "liu.y.ca@m.titech.ac.jp",
+    "userName": "qiusenwan666",
+    "sexual": false,
+    "educations": [
+      {
+        "university": "Southeast University",
+        "degree": "bachelor",
+        "major": "Computer Scicence",
+        "startDate": "2015-09-01",
+        "endDate": "2019-06-01"
+      },
+      {
+        "university": "University of Tokyo",
+        "degree": "master",
+        "major": "Computer Science",
+        "startDate": "2021-09-01",
+        "endDate": "2023-09-01"
+      }
+    ],
+    "experience": [
+      {
+        "experienceType": "intern",
+        "title": "Amazon SDE Intern",
+        "description": "Intern in Amazon Japan",
+        "startDate": "2022-03-01",
+        "endDate": "2022-05-01"
+      }
+    ],
+    "role": 0,
+    "target": [3]
+  }
 ]
