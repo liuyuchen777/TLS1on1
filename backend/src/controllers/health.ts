@@ -7,6 +7,7 @@ function checkHealth(req: express.Request, res: express.Response): void {
 }
 
 function checkPrivateHealth(req: express.Request, res: express.Response): void {
+  console.log(`user id: ${req.auth?.payload.sub}`)
   res.json({
     msg: "Hello World Privately!"
   });
