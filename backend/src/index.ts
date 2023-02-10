@@ -1,9 +1,7 @@
 import express from "express";
 
-import "./config.js";
 import { addRouter } from "./routes/router.js";
-import configMiddleware from "./config-middleware.js";
-import { PORT } from "./utils/constant";
+import { errorHandler } from "./middleware/error";
 
 const app = express();
 
@@ -12,14 +10,16 @@ const app = express();
 
   // initialize DB
 
-  // config express midlleware
-  configMiddleware(app);
+  // config cors
 
   // add api
   addRouter(app);
+  
+  // config middleware
+  app.use(errorHandler);
 
   // start express app
-  app.listen(PORT, () => {
-    console.log(`SeverStart -> express listen on ${PORT}`);
+  app.listen(process.env.PORT, () => {
+    console.log(`SeverStart -> express listen on ${process.env.PORT}`);
   });
 })();
