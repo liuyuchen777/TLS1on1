@@ -2,6 +2,7 @@ import express from "express";
 
 import { addRouter } from "./routes/router.js";
 import { errorHandler } from "./middleware/error";
+import cors from "cors";
 
 const app = express();
 
@@ -11,7 +12,8 @@ const app = express();
   // initialize DB
 
   // config cors
-
+  app.use(cors({origin: true}))
+  
   // add api
   addRouter(app);
   
