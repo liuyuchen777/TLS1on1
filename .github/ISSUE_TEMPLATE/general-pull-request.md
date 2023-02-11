@@ -9,7 +9,11 @@ assignees: ''
 
 # Description
 
+Some description
+
 # Previous Issues
+
+- #1
 
 # Reference
 - [This is a reference](https://www.example.com)
